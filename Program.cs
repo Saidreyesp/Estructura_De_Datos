@@ -1,70 +1,54 @@
 ﻿using System;
 
-// Clase para representar un Círculo
-public class Circulo
+namespace RegistroEstudiantes
 {
-    // Radio del círculo (encapsulado como propiedad)
-    public double Radio { get; set; }
-
-    // Constructor de la clase Circulo
-    public Circulo(double radio)
+    // Definición de la clase Estudiante
+    public class Estudiante
     {
-        Radio = radio;
+        public int Id { get; set; }
+        public string Nombres { get; set; }
+        public string Apellidos { get; set; }
+        public string Direccion { get; set; }
+        public string[] Telefonos { get; set; } // Array para almacenar los teléfonos
+
+        // Constructor para inicializar los valores del estudiante
+        public Estudiante(int id, string nombres, string apellidos, string direccion, string[] telefonos)
+        {
+            Id = id;
+            Nombres = nombres;
+            Apellidos = apellidos;
+            Direccion = direccion;
+            Telefonos = telefonos;
+        }
+
+        // Método para mostrar la información del estudiante
+        public void MostrarInfo()
+        {
+            Console.WriteLine($"ID: {Id}");
+            Console.WriteLine($"Nombres: {Nombres}");
+            Console.WriteLine($"Apellidos: {Apellidos}");
+            Console.WriteLine($"Dirección: {Direccion}");
+            Console.WriteLine("Teléfonos:");
+            foreach (var telefono in Telefonos)
+            {
+                Console.WriteLine(telefono); // Mostrar cada teléfono en una línea separada
+            }
+        }
     }
 
-    // CalcularArea devuelve el área del círculo usando la fórmula π * r²
-    public double CalcularArea()
+    // Clase principal para ejecutar el programa
+    class Program
     {
-        return Math.PI * Radio * Radio;
-    }
+        static void Main(string[] args)
+        {
+            // Datos del estudiante
+            string[] telefonos = { "0967283141", "0992884043", "0987654321" };
 
-    // CalcularPerimetro devuelve la circunferencia (perímetro) usando 2 * π * r
-    public double CalcularPerimetro()
-    {
-        return 2 * Math.PI * Radio;
-    }
-}
+            // Crear un objeto Estudiante
+            Estudiante estudiante = new Estudiante(1, "Said Ramon", "Reyes Pianda", "Quevedo-La Esperanza", telefonos);
 
-// Clase para representar un Rectángulo
-public class Rectangulo
-{
-    // Propiedades encapsuladas: Largo y Ancho
-    public double Largo { get; set; }
-    public double Ancho { get; set; }
-
-    // Constructor de la clase Rectangulo
-    public Rectangulo(double largo, double ancho)
-    {
-        Largo = largo;
-        Ancho = ancho;
-    }
-
-    // CalcularArea devuelve el área del rectángulo (Largo * Ancho)
-    public double CalcularArea()
-    {
-        return Largo * Ancho;
-    }
-
-    // CalcularPerimetro devuelve el perímetro del rectángulo (2 * (Largo + Ancho))
-    public double CalcularPerimetro()
-    {
-        return 2 * (Largo + Ancho);
-    }
-}
-
-// Ejemplo de uso (Programa principal)
-class Program
-{
-    static void Main(string[] args)
-    {
-        // Ejemplo con Círculo
-        Circulo miCirculo = new Circulo(5.0);
-        Console.WriteLine("Área del círculo: " + miCirculo.CalcularArea());
-        Console.WriteLine("Perímetro del círculo: " + miCirculo.CalcularPerimetro());
-
-        // Ejemplo con Rectángulo
-        Rectangulo miRectangulo = new Rectangulo(4.0, 6.0);
-        Console.WriteLine("Área del rectángulo: " + miRectangulo.CalcularArea());
-        Console.WriteLine("Perímetro del rectángulo: " + miRectangulo.CalcularPerimetro());
+            // Mostrar la información del estudiante
+            estudiante.MostrarInfo();
+        }
     }
 }
