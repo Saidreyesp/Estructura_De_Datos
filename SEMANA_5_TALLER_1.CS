@@ -1,35 +1,58 @@
 using System;
 using System.Collections.Generic;
 
-class Curso
+class Loteria
 {
-    public List<string> Asignaturas { get; set; }
+    public List<int> NumerosGanadores { get; set; }
 
-    public Curso()
+    public Loteria()
     {
-        // Inicializamos la lista con las asignaturas
-        Asignaturas = new List<string> { "Metodologia de la investigacion", "Estructura de datos", "Fundamentos digitales", "Administracion de sistemas operativos", "Istalaciones electricas" };
+        // Inicializamos la lista de números ganadores
+        NumerosGanadores = new List<int>();
     }
 
-    public void MostrarAsignaturas()
+    public void PedirNumeros()
     {
-        // Mostramos las asignaturas por pantalla
-        Console.WriteLine("Asignaturas del curso:");
-        foreach (var asignatura in Asignaturas)
+        Console.WriteLine("Introduce los números ganadores de la lotería (6 números):");
+
+        // Pedimos 6 números ganadores
+        for (int i = 0; i < 6; i++)
         {
-            Console.WriteLine(asignatura);
+            Console.Write($"Introduce el número #{i + 1}: ");
+            int numero;
+            while (!int.TryParse(Console.ReadLine(), out numero) || numero < 1 || numero > 49)
+            {
+                Console.WriteLine("Por favor, introduce un número válido entre 1 y 49.");
+                Console.Write($"Introduce el número #{i + 1}: ");
+            }
+            NumerosGanadores.Add(numero);
+        }
+    }
+
+    public void MostrarNumerosOrdenados()
+    {
+        // Ordenamos la lista de números ganadores
+        NumerosGanadores.Sort();
+
+        Console.WriteLine("\nNúmeros ganadores ordenados de menor a mayor:");
+        foreach (var numero in NumerosGanadores)
+        {
+            Console.WriteLine(numero);
         }
     }
 }
 
-class CursoProgram
+class Program
 {
     static void Main(string[] args)
     {
-        // Creamos una instancia del objeto Curso
-        Curso curso = new Curso();
+        // Creamos una instancia del objeto Loteria
+        Loteria loteria = new Loteria();
 
-        // Mostramos las asignaturas
-        curso.MostrarAsignaturas();
+        // Pedimos los números ganadores al usuario
+        loteria.PedirNumeros();
+
+        // Mostramos los números ordenados
+        loteria.MostrarNumerosOrdenados();
     }
 }
